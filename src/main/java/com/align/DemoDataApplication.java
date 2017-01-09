@@ -8,5 +8,8 @@ public class DemoDataApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoDataApplication.class, args);
+
+        processControl controller = processControl.getInstance();
+        controller.generateData();
 	}
 }
