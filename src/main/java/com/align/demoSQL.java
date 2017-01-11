@@ -13,18 +13,35 @@ public class demoSQL {
         m_con = con;
     }
 
-    public ResultSet getMembers(){
+    public ResultSet getMembers() {
+
+        String query = "SELECT name_first,name_last FROM align.members;";
+        return getRecords(query);
+    }
+
+    public ResultSet getFirstNames(){
+        String query = "SELECT firstname FROM align.firstnames;";
+        return getRecords(query);
+    }
+
+    public ResultSet getLastNames(){
+        String query = "SELECT lastname FROM align.lastnames;";
+        return getRecords(query);
+    }
+
+    public void postDemoMember(){
+
+    }
+
+    private ResultSet getRecords(String query){
         ResultSet rs = null;
         Statement stmt;
-        String query;
 
-        try{
-            query = "SELECT name_first,name_last FROM align.members;";
+        try {
             stmt = m_con.createStatement();
-
             rs = stmt.executeQuery(query);
-        }
-        catch(Exception e){
+
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
         return rs;

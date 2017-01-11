@@ -10,6 +10,6 @@ public class DemoDataApplication {
 		SpringApplication.run(DemoDataApplication.class, args);
 
         processControl controller = processControl.getInstance();
-        controller.generateData();
+        controller.run();
 	}
 }

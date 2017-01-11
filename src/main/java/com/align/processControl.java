@@ -29,15 +29,24 @@ public class processControl {
         return m_instance;
     }
 
-    public void generateData(){
+    public void run(){
         ResultSet rs;
-        try{
+        try {
+
+            CryptoKeeper cryptKeeper = new CryptoKeeper();
+
+//            String hash = cryptKeeper.hashMaker("123456789");
+//            System.out.println("Feel the hash potatoes " + hash);
+
+            String hash = cryptKeeper.lowSodium_Hash("123456789");
+            System.out.println("do the Hash.. the monster hash: " + hash);
+
             rs = m_dbconnect.getMembers();
             //rs.first();
             while (rs.next())
             {
-                System.out.print("Column 1 returned ");
-                System.out.println(rs.getString(1));
+//                System.out.print("Column 1 returned ");
+//                System.out.println(rs.getString(1));
             }
             rs.close();
         }catch(Exception e){
@@ -48,7 +57,6 @@ public class processControl {
     private Connection initConnection() throws SQLException, ClassNotFoundException {
         try {
             Class.forName("org.postgresql.Driver");
-            //Connection pgConnect = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "", "");
             Connection pgConnect = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres");
             pgConnect.setAutoCommit(false);
 
