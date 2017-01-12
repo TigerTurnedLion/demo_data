@@ -12,11 +12,17 @@ public class Obfuscator {
     private ArrayList<String> m_lastnames;
 
     public Obfuscator(){
-        
+
     }
 
     //Accessors and Mutators
-    public
+    public void setFirstnames( ArrayList<String> firstnames ){
+        m_firstnames = firstnames;
+    }
+
+    public void setLastnames( ArrayList<String> lastnames ){
+        m_lastnames = lastnames;
+    }
 
 
     // argument: firstname.

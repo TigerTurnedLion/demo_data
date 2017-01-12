@@ -3,6 +3,7 @@ package com.align;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Created by john on 1/8/17.
@@ -11,11 +12,14 @@ public class processControl {
 
     private static processControl m_instance = null;
     private demoSQL m_dbconnect = null;
+    private Obfuscator m_obfuscate = null;
 
     private processControl() {
 
         try {
             this.m_dbconnect = new demoSQL(initConnection());
+            this.m_obfuscate = new Obfuscator();
+
             System.out.println("processControl construction complete!");
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -31,22 +35,36 @@ public class processControl {
 
     public void run(){
         ResultSet rs;
+        ArrayList<String> firstnames = null;
+        ArrayList<String> lastnames = null;
+        String firstName;
+        String lastName;
+        Obfuscator obfuscate;
+
         try {
+            rs = m_dbconnect.getFirstNames();
+            rs = m_dbconnect.getLastNames();
 
-            CryptoKeeper cryptKeeper = new CryptoKeeper();
-
-//            String hash = cryptKeeper.hashMaker("123456789");
-//            System.out.println("Feel the hash potatoes " + hash);
-
-            String hash = cryptKeeper.lowSodium_Hash("123456789");
-            System.out.println("do the Hash.. the monster hash: " + hash);
+            m_obfuscate.setFirstnames(firstnames);
+            m_obfuscate.setLastnames(lastnames);
 
             rs = m_dbconnect.getMembers();
-            //rs.first();
             while (rs.next())
             {
-//                System.out.print("Column 1 returned ");
-//                System.out.println(rs.getString(1));
+
+                m_dbconnect.postDemoMember(
+                    rs.getString("id_member"),
+                    rs.getDate("birth_date"),
+                    rs.getString("gender_code"),
+                    rs.getString("name_first"),
+                    rs.getString("name_last"),
+                    rs.getDate("membership_date"),
+                    rs.getString("region"),
+                    rs.getString("group_id"),
+                    rs.getString("office"),
+                    rs.getString("new_member"),
+                    rs.getString("lob")
+                );
             }
             rs.close();
         }catch(Exception e){
