@@ -112,3 +112,8 @@ CREATE TABLE align.hash_claims(
   quantity DECIMAL,
   day_supply INT
 );
+
+SELECT COUNT(1) AS member_count FROM align.members;
+SELECT COUNT(1) AS hash_member_count FROM align.hash_members;
+
+TRUNCATE align.hash_members;

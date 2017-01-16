@@ -98,7 +98,6 @@ public class demoSQL {
             this.insertDemoMember_Statement.setString(11,lob);
 
             this.insertDemoMember_Statement.executeUpdate();
-            this.m_con.commit();
         }
         catch(Exception e){
             System.err.println(e.getMessage());
@@ -117,5 +116,27 @@ public class demoSQL {
             System.err.println(e.getMessage());
         }
         return rs;
+    }
+
+    public void truncateTable(String table){
+        try {
+            Statement stmt = m_con.createStatement();
+            stmt.execute( "TRUNCATE " + table );
+        }
+        catch(SQLException se){
+            System.err.println(se.getMessage());
+        }
+
+    }
+    public boolean commitWork(){
+        boolean committed = false;
+        try {
+            this.m_con.commit();
+            committed = true;
+        }
+        catch(SQLException se){
+            System.err.println(se.getMessage());
+        }
+        return committed;
     }
 }

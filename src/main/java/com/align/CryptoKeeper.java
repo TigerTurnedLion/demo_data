@@ -8,15 +8,6 @@ import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
-/*
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.security.SecureRandom;
-import java.lang.Math.*;
-*/
-
-
 /**
  * Created by john on 1/1/17.
  */

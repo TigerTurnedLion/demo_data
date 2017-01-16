@@ -11,8 +11,9 @@ public class Obfuscator {
     private ArrayList<String> m_firstnames;
     private ArrayList<String> m_lastnames;
 
-    public Obfuscator(){
-
+    public Obfuscator(ArrayList<String> firstnames, ArrayList<String> lastnames){
+        m_firstnames = firstnames;
+        m_lastnames = lastnames;
     }
 
     //Accessors and Mutators
@@ -26,7 +27,7 @@ public class Obfuscator {
 
 
     // argument: firstname.
-    public static String getNewFirstName( String firstname ){
+    public String getNewFirstName( String firstname ){
 
         try{
 
@@ -37,7 +38,7 @@ public class Obfuscator {
         return firstname;
     }
 
-    public static String getNewLastName( String lastname ){
+    public String getNewLastName( String lastname ){
         try{
 
         }
@@ -47,7 +48,7 @@ public class Obfuscator {
         return lastname;
     }
 
-    public static Date getNewBirthday ( Date birthday ){
+    public Date getNewBirthday ( Date birthday ){
         try{
 
         }
@@ -57,7 +58,7 @@ public class Obfuscator {
         return birthday;
     }
 
-    public static String getLowSodium_Hash( String id ){
+    public String getLowSodium_Hash( String id ){
         String hash = "";
 
         try{
