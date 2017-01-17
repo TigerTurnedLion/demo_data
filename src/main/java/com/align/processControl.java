@@ -99,7 +99,7 @@ public class processControl {
         ResultSet rs;
         String firstName;
         String lastName;
-        String id_hash;
+        String hash_id;
         Date newBday;
 
         try {
@@ -110,11 +110,11 @@ public class processControl {
 
                 firstName = m_obfuscate.getNewFirstName(rs.getString("name_first"));
                 lastName = m_obfuscate.getNewLastName(rs.getString("name_last"));
-                id_hash = m_obfuscate.getLowSodium_Hash(rs.getString("id_member"));
+                hash_id = m_obfuscate.getLowSodium_Hash(rs.getString("id_member"));
                 newBday = m_obfuscate.getNewBirthday(rs.getDate("birth_date"));
 
                 m_dbconnect.postDemoMember(
-                        id_hash,
+                        hash_id,
                         newBday,
                         rs.getString("gender_code"),
                         firstName,
@@ -133,9 +133,81 @@ public class processControl {
         }
     }
     private void obscureProviders(){
+        ResultSet rs;
+        String firstName;
+        String lastName;
+        String provider_id_hash;
+        String provider_dea_hash;
+
+        try {
+            rs = m_dbconnect.getProviders();
+            m_dbconnect.truncateTable("align.hash_providers");
+            while (rs.next())
+            {
+
+                firstName = m_obfuscate.getNewFirstName(rs.getString("provider_name_first"));
+                lastName = m_obfuscate.getNewLastName(rs.getString("provider_name_last"));
+                provider_id_hash = m_obfuscate.getLowSodium_Hash(rs.getString("ordering_physician_id"));
+                provider_dea_hash = m_obfuscate.getLowSodium_Hash(rs.getString("ordering_physician_dea"));
+
+                m_dbconnect.postDemoProvider(
+                        provider_id_hash,
+                        firstName,
+                        lastName,
+                        provider_dea_hash,
+                        rs.getString("specialty_code"),
+                        rs.getBoolean("network_participant")
+                );
+            }
+            rs.close();
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+        }
 
     }
     private void obscureClaims(){
+        ResultSet rs;
+        String member_id_hash;
+        String physician_id_hash;
+        String physician_dea_hash;
+        String pharmacy_id_hash;
 
+        try {
+            rs = m_dbconnect.getClaims();
+            m_dbconnect.truncateTable("align.hash_claims");
+            while (rs.next())
+            {
+                member_id_hash = m_obfuscate.getLowSodium_Hash(rs.getString("id_number"));
+                physician_id_hash = m_obfuscate.getLowSodium_Hash(rs.getString("ordering_physician_id"));
+                physician_dea_hash = m_obfuscate.getLowSodium_Hash(rs.getString("ordering_physician_dea"));
+                pharmacy_id_hash = m_obfuscate.getLowSodium_Hash(rs.getString("pharmacy_id"));
+
+                m_dbconnect.postDemoClaim(
+                        rs.getString("pharmacy_claim_nbr"),
+                        member_id_hash,
+                        physician_id_hash,
+                        physician_dea_hash,
+                        pharmacy_id_hash,
+                        rs.getString("prescription_nbr"),
+                        rs.getString("refill_code"),
+                        rs.getString("ndc"),
+                        rs.getDate("date_paid"),
+                        rs.getDate("date_filled"),
+                        rs.getString("brand_or_generic"),
+                        rs.getBigDecimal("amount_paid"),
+                        rs.getBigDecimal("ingredient_cost"),
+                        rs.getBigDecimal("dispensing_fee"),
+                        rs.getBigDecimal("copay_amt"),
+                        rs.getBigDecimal("deductible_amount"),
+                        rs.getBigDecimal("disallowed_amount"),
+                        rs.getBigDecimal("awp"),
+                        rs.getBigDecimal("quantity"),
+                        rs.getBigDecimal("day_supply")
+                );
+            }
+            rs.close();
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+        }
     }
 }

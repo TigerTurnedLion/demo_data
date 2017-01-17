@@ -48,7 +48,7 @@ public class CryptoKeeper {
             byte[] hash = f.generateSecret(spec).getEncoded();
             Base64.Encoder enc = Base64.getEncoder();
 
-            System.out.printf("hash: %s%n", enc.encodeToString(hash));
+            //System.out.printf("hash: %s%n", enc.encodeToString(hash));
 
             hashString = enc.encodeToString(hash);
         }

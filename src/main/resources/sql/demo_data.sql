@@ -84,7 +84,7 @@ CREATE TABLE align.hash_providers(
   physician_id_hash VARCHAR,
   provider_name_first VARCHAR,
   provider_name_last VARCHAR,
-  ordering_physician_dea VARCHAR,
+  ordering_physician_dea_hash VARCHAR,
   specialty_code VARCHAR,
   network_participant BOOLEAN
 );
@@ -92,10 +92,10 @@ CREATE TABLE align.hash_providers(
 DROP TABLE IF EXISTS align.hash_claims;
 CREATE TABLE align.hash_claims(
   pharmacy_claim_nbr VARCHAR,
-  id_number VARCHAR,
-  ordering_physician_id VARCHAR,
-  ordering_physician_dea VARCHAR,
-  pharmacy_id VARCHAR,
+  member_id_hash VARCHAR,
+  physician_id_hash VARCHAR,
+  physician_dea_hash VARCHAR,
+  pharmacy_id_hash VARCHAR,
   prescription_nbr VARCHAR,
   refill_code CHAR,
   ndc VARCHAR,
@@ -117,3 +117,8 @@ SELECT COUNT(1) AS member_count FROM align.members;
 SELECT COUNT(1) AS hash_member_count FROM align.hash_members;
 
 TRUNCATE align.hash_members;
+
+SELECT * FROM align.providers WHERE ordering_physician_dea IS NOT NULL LIMIT 5;
+
+SELECT * FROM align.claims WHERE pharmacy_id IS NOT NULL LIMIT 5;
+
