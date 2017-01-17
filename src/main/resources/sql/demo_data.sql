@@ -116,9 +116,18 @@ CREATE TABLE align.hash_claims(
 SELECT COUNT(1) AS member_count FROM align.members;
 SELECT COUNT(1) AS hash_member_count FROM align.hash_members;
 
+SELECT COUNT(1) AS hash_provider_count FROM align.hash_providers;
+SELECT COUNT(1) AS hash_claim_count FROM align.hash_claims;
+
 TRUNCATE align.hash_members;
 
 SELECT * FROM align.providers WHERE ordering_physician_dea IS NOT NULL LIMIT 5;
 
 SELECT * FROM align.claims WHERE pharmacy_id IS NOT NULL LIMIT 5;
+
+SELECT * FROM align.hash_members;
+
+SELECT * FROM align.hash_providers;
+
+SELECT * FROM align.hash_claims;
 
