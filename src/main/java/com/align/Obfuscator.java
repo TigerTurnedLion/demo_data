@@ -27,6 +27,7 @@ public class Obfuscator {
     }
 
     public String getNewLastName( String lastname ){
+
         return getNewName(m_lastnames,lastname);
     }
 
@@ -49,6 +50,7 @@ public class Obfuscator {
             }
             catch( Exception e ){
                 System.err.println( e.getMessage());
+                e.printStackTrace();
             }
         }
         return newName;
@@ -76,6 +78,7 @@ public class Obfuscator {
         }
         catch( Exception e ){
             System.err.println( e.getMessage());
+            e.printStackTrace();
         }
         return newBirthday;
     }
@@ -98,6 +101,7 @@ public class Obfuscator {
         }
         catch( Exception e ){
             System.err.println( e.getMessage());
+            e.printStackTrace();
         }
         return hash;
     }

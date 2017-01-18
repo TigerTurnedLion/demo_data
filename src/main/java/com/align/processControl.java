@@ -23,6 +23,7 @@ public class processControl {
             System.out.println("processControl construction complete!");
         } catch (Exception e) {
             System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -55,6 +56,7 @@ public class processControl {
             return pgConnect;
         }
         catch(ClassNotFoundException | SQLException e){
+            e.printStackTrace();
             throw e;
         }
     }
@@ -72,6 +74,7 @@ public class processControl {
         }
         catch(Exception e) {
             System.err.println(e.getMessage());
+            e.printStackTrace();
         }
 
         return firstnames;
@@ -90,6 +93,7 @@ public class processControl {
         }
         catch(Exception e) {
             System.err.println(e.getMessage());
+            e.printStackTrace();
         }
 
         return lastnames;
@@ -108,10 +112,10 @@ public class processControl {
             while (rs.next())
             {
 
-                firstName = m_obfuscate.getNewFirstName(rs.getString("name_first"));
-                lastName = m_obfuscate.getNewLastName(rs.getString("name_last"));
-                hash_id = m_obfuscate.getLowSodium_Hash(rs.getString("id_member"));
-                newBday = m_obfuscate.getNewBirthday(rs.getDate("birth_date"));
+                firstName = (rs.getString("name_first") == null)? null :m_obfuscate.getNewFirstName(rs.getString("name_first"));
+                lastName = (rs.getString("name_last") == null)? null :m_obfuscate.getNewLastName(rs.getString("name_last"));
+                hash_id = (rs.getString("id_member") == null)? null :m_obfuscate.getLowSodium_Hash(rs.getString("id_member"));
+                newBday = (rs.getDate("birth_date") == null)? null :m_obfuscate.getNewBirthday(rs.getDate("birth_date"));
 
                 m_dbconnect.postDemoMember(
                         hash_id,
@@ -130,6 +134,7 @@ public class processControl {
             rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
     private void obscureProviders(){
@@ -145,10 +150,10 @@ public class processControl {
             while (rs.next())
             {
 
-                firstName = m_obfuscate.getNewFirstName(rs.getString("provider_name_first"));
-                lastName = m_obfuscate.getNewLastName(rs.getString("provider_name_last"));
-                provider_id_hash = m_obfuscate.getLowSodium_Hash(rs.getString("ordering_physician_id"));
-                provider_dea_hash = m_obfuscate.getLowSodium_Hash(rs.getString("ordering_physician_dea"));
+                firstName = (rs.getString("provider_name_first") == null)? null :m_obfuscate.getNewFirstName(rs.getString("provider_name_first"));
+                lastName = (rs.getString("provider_name_last") == null)? null :m_obfuscate.getNewLastName(rs.getString("provider_name_last"));
+                provider_id_hash = (rs.getString("ordering_physician_id") == null)? null :m_obfuscate.getLowSodium_Hash(rs.getString("ordering_physician_id"));
+                provider_dea_hash = (rs.getString("ordering_physician_dea") == null)? null :m_obfuscate.getLowSodium_Hash(rs.getString("ordering_physician_dea"));
 
                 m_dbconnect.postDemoProvider(
                         provider_id_hash,
@@ -162,6 +167,7 @@ public class processControl {
             rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
+            e.printStackTrace();
         }
 
     }
@@ -177,10 +183,10 @@ public class processControl {
             m_dbconnect.truncateTable("align.hash_claims");
             while (rs.next())
             {
-                member_id_hash = m_obfuscate.getLowSodium_Hash(rs.getString("id_number"));
-                physician_id_hash = m_obfuscate.getLowSodium_Hash(rs.getString("ordering_physician_id"));
-                physician_dea_hash = m_obfuscate.getLowSodium_Hash(rs.getString("ordering_physician_dea"));
-                pharmacy_id_hash = m_obfuscate.getLowSodium_Hash(rs.getString("pharmacy_id"));
+                member_id_hash = (rs.getString("id_number") == null)? null : m_obfuscate.getLowSodium_Hash(rs.getString("id_number"));
+                physician_id_hash = (rs.getString("ordering_physician_id") == null)? null : m_obfuscate.getLowSodium_Hash(rs.getString("ordering_physician_id"));
+                physician_dea_hash = (rs.getString("ordering_physician_dea") == null)? null :m_obfuscate.getLowSodium_Hash(rs.getString("ordering_physician_dea"));
+                pharmacy_id_hash = (rs.getString("pharmacy_id") == null)? null :m_obfuscate.getLowSodium_Hash(rs.getString("pharmacy_id"));
 
                 m_dbconnect.postDemoClaim(
                         rs.getString("pharmacy_claim_nbr"),
@@ -208,6 +214,7 @@ public class processControl {
             rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }

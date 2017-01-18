@@ -231,6 +231,7 @@ public class demoSQL {
         }
         catch(Exception e){
             System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -254,6 +255,7 @@ public class demoSQL {
         }
         catch(Exception e){
             System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -304,6 +306,7 @@ public class demoSQL {
         }
         catch(Exception e){
             System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -315,6 +318,7 @@ public class demoSQL {
         }
         catch(SQLException se){
             System.err.println(se.getMessage());
+            se.printStackTrace();
         }
         return committed;
     }

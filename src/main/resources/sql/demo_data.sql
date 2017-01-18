@@ -124,8 +124,14 @@ TRUNCATE align.hash_members;
 SELECT * FROM align.providers WHERE ordering_physician_dea IS NOT NULL LIMIT 5;
 
 SELECT * FROM align.claims WHERE pharmacy_id IS NOT NULL LIMIT 5;
+SELECT * FROM align.claims WHERE pharmacy_id IS NULL LIMIT 5;
+
+
+
+SELECT * FROM align.members LIMIT 10;
 
 SELECT * FROM align.hash_members;
+SELECT * FROM align.members LIMIT 10;
 
 SELECT * FROM align.hash_providers;
 

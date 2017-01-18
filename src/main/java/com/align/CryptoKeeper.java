@@ -33,6 +33,7 @@ public class CryptoKeeper {
             hashString = enc.encodeToString(hash);
         }
         catch(NoSuchAlgorithmException | InvalidKeySpecException e){
+            e.printStackTrace();
             throw e;
         }
 
@@ -48,11 +49,10 @@ public class CryptoKeeper {
             byte[] hash = f.generateSecret(spec).getEncoded();
             Base64.Encoder enc = Base64.getEncoder();
 
-            //System.out.printf("hash: %s%n", enc.encodeToString(hash));
-
             hashString = enc.encodeToString(hash);
         }
         catch(NoSuchAlgorithmException | InvalidKeySpecException e){
+            e.printStackTrace();
             throw e;
         }
 
