@@ -120,7 +120,9 @@ public class demoSQL {
                     "new_member," +
                     "lob " +
                 "FROM " +
-                    "align.members LIMIT 10;";
+                    "align.members " +
+                "ORDER BY " +
+                    "id;";
         return getRecords(query);
     }
 
@@ -134,7 +136,7 @@ public class demoSQL {
                     "specialty_code," +
                     "network_participant " +
                 "FROM " +
-                    "align.providers LIMIT 10;";
+                    "align.providers;";
 
         return getRecords(query);
     }
@@ -162,7 +164,7 @@ public class demoSQL {
                         "quantity," +
                         "day_supply " +
                 "FROM " +
-                    "align.claims LIMIT 10;";
+                    "align.claims;";
 
         return getRecords(query);
     }

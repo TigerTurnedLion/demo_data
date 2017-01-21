@@ -114,6 +114,9 @@ CREATE TABLE align.hash_claims(
 );
 
 SELECT COUNT(1) AS member_count FROM align.members;
+SELECT COUNT(1) AS provider_count FROM align.providers;
+SELECT COUNT(1) AS claim_count FROM align.claims;
+
 SELECT COUNT(1) AS hash_member_count FROM align.hash_members;
 
 SELECT COUNT(1) AS hash_provider_count FROM align.hash_providers;
@@ -137,3 +140,58 @@ SELECT * FROM align.hash_providers;
 
 SELECT * FROM align.hash_claims;
 
+SELECT id_member FROM align.members ORDER BY id;
+
+SELECT * FROM align.hash_members;
+
+
+DROP TABLE IF EXISTS align.hash_members_bak;
+CREATE TABLE align.hash_members_bak(
+  member_id_hash VARCHAR,
+  birth_date DATE,
+  gender_code CHAR,
+  name_first VARCHAR,
+  name_last VARCHAR,
+  membership_date DATE,
+  region VARCHAR,
+  group_id VARCHAR,
+  office VARCHAR,
+  new_member VARCHAR,
+  LOB VARCHAR
+);
+
+INSERT INTO align.hash_members_bak(
+  member_id_hash,
+  birth_date,
+  gender_code,
+  name_first,
+  name_last,
+  membership_date,
+  region,
+  group_id,
+  office,
+  new_member,
+  LOB
+)
+  SELECT
+    member_id_hash,
+    birth_date,
+    gender_code,
+    name_first,
+    name_last,
+    membership_date,
+    region,
+    group_id,
+    office,
+    new_member,
+    LOB
+  FROM
+    align.hash_members;
+
+SELECT COUNT(1) FROM align.hash_members_bak;
+
+SELECT * FROM align.hash_members;
+
+SELECT * FROM align.hash_providers;
+
+SELECT * FROM align.hash_claims;

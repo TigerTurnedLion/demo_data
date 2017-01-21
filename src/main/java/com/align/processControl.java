@@ -40,10 +40,7 @@ public class processControl {
         obscureMembers();
         obscureProviders();
         obscureClaims();
-
-        //Now commit all upserts to the database.
-        m_dbconnect.commitWork();
-
+        
         //Export results.
     }
 
@@ -130,8 +127,11 @@ public class processControl {
                         rs.getString("new_member"),
                         rs.getString("lob")
                 );
+
+                System.out.println("Obscure Members row number: " + String.valueOf(rs.getRow()));
             }
             rs.close();
+            m_dbconnect.commitWork();
         }catch(Exception e){
             System.err.println(e.getMessage());
             e.printStackTrace();
@@ -163,8 +163,11 @@ public class processControl {
                         rs.getString("specialty_code"),
                         rs.getBoolean("network_participant")
                 );
+
+                System.out.println("Obscure Providers row number: " + String.valueOf(rs.getRow()));
             }
             rs.close();
+            m_dbconnect.commitWork();
         }catch(Exception e){
             System.err.println(e.getMessage());
             e.printStackTrace();
@@ -210,8 +213,10 @@ public class processControl {
                         rs.getBigDecimal("quantity"),
                         rs.getBigDecimal("day_supply")
                 );
+                System.out.println("Obscure Claims row number: " + String.valueOf(rs.getRow()));
             }
             rs.close();
+            m_dbconnect.commitWork();
         }catch(Exception e){
             System.err.println(e.getMessage());
             e.printStackTrace();

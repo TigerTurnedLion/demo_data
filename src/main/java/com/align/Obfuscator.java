@@ -94,10 +94,12 @@ public class Obfuscator {
     }
 
     public String getLowSodium_Hash( String id ){
+        String key = "";
         String hash = "";
 
         try{
-            hash = CryptoKeeper.lowSodium_Hash(id);
+            CryptoKeeper.setKey(key);
+            hash = CryptoKeeper.encrypt(id);
         }
         catch( Exception e ){
             System.err.println( e.getMessage());
