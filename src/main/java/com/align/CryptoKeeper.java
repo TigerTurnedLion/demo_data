@@ -10,7 +10,7 @@ import org.apache.commons.codec.binary.Base64;
 /**
  Aes encryption
  */
-//public class AES
+
 public class CryptoKeeper
 {
 
@@ -36,6 +36,7 @@ public class CryptoKeeper
 
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
+
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -56,7 +57,7 @@ public class CryptoKeeper
     }
     public static String encrypt(String id){
 
-
+        String hashBrown = "";
 
         try
         {
@@ -64,16 +65,15 @@ public class CryptoKeeper
 
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
 
-
-            setEncryptedString(Base64.encodeBase64String(cipher.doFinal(id.getBytes("UTF-8"))));
+            hashBrown = Base64.encodeBase64String(cipher.doFinal(id.getBytes("UTF-8")));
 
         }
         catch (Exception e)
         {
-
-            System.out.println("Error while encrypting: "+e.toString());
+            System.out.println("Error while encrypting: " + e.getMessage());
+            e.printStackTrace();
         }
-        return null;
+        return hashBrown;
     }
     public static String decrypt(String strToDecrypt)
     {
@@ -93,74 +93,3 @@ public class CryptoKeeper
         return null;
     }
 }
-
-
-
-/*
-package com.align;
-
-import java.security.spec.KeySpec;
-import java.util.Base64;
-import java.util.*;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-
-/**
- * Created by john on 1/1/17.
- */
-
-/*
-
-public class CryptoKeeper {
-
-    public CryptoKeeper(){
-
-    }
-
-    public String hashMaker(String id) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        String hashString = null;
-        try {
-            Random random = new Random();
-            byte[] salt = new byte[16];
-            random.nextBytes(salt);
-            KeySpec spec = new PBEKeySpec(id.toCharArray(), salt, 65536, 128);
-            SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            byte[] hash = f.generateSecret(spec).getEncoded();
-            Base64.Encoder enc = Base64.getEncoder();
-            System.out.printf("salt: %s%n", enc.encodeToString(salt));
-            System.out.printf("hash: %s%n", enc.encodeToString(hash));
-
-            hashString = enc.encodeToString(hash);
-        }
-        catch(NoSuchAlgorithmException | InvalidKeySpecException e){
-            e.printStackTrace();
-            throw e;
-        }
-
-        return hashString;
-    }
-    public static String lowSodium_Hash(String id)throws NoSuchAlgorithmException, InvalidKeySpecException {
-        String hashString = null;
-
-        try{
-            byte[] salt = new byte[16];
-            KeySpec spec = new PBEKeySpec(id.toCharArray(), salt, 65536, 128);
-            //SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            SecretKeyFactory f = SecretKeyFactory.getInstance("AES");
-            byte[] hash = f.generateSecret(spec).getEncoded();
-            Base64.Encoder enc = Base64.getEncoder();
-
-            hashString = enc.encodeToString(hash);
-        }
-        catch(NoSuchAlgorithmException | InvalidKeySpecException e){
-            e.printStackTrace();
-            throw e;
-        }
-
-        return hashString;
-    }
-}
-
-*/
