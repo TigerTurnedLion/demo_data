@@ -121,8 +121,6 @@ public class demoSQL {
                     "lob " +
                 "FROM " +
                     "align.members " +
-                "WHERE " +
-                    "processed = false " +
                 "ORDER BY " +
                     "id;";
         return getRecords(query);
@@ -138,9 +136,7 @@ public class demoSQL {
                     "specialty_code," +
                     "network_participant " +
                 "FROM " +
-                    "align.providers " +
-                "WHERE " +
-                    "processed = false;";
+                    "align.providers;";
 
         return getRecords(query);
     }
@@ -168,9 +164,7 @@ public class demoSQL {
                     "quantity," +
                     "day_supply " +
                 "FROM " +
-                    "align.claims " +
-                "WHERE " +
-                    "processed = false;";
+                    "align.claims;";
 
         return getRecords(query);
     }

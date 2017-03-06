@@ -1,6 +1,6 @@
 CREATE SCHEMA align;
 
---intake tables
+--Intake tables
 --==================================
 DROP TABLE IF EXISTS align.members;
 CREATE TABLE align.members(
@@ -15,8 +15,7 @@ CREATE TABLE align.members(
   group_id VARCHAR,
   office VARCHAR,
   new_member VARCHAR,
-  LOB VARCHAR,
-  processed BOOLEAN DEFAULT FALSE
+  LOB VARCHAR
 );
 
 DROP TABLE IF EXISTS align.providers;
@@ -27,8 +26,7 @@ CREATE TABLE align.providers(
   provider_name_last VARCHAR,
   ordering_physician_dea VARCHAR,
   specialty_code VARCHAR,
-  network_participant BOOLEAN,
-  processed BOOLEAN DEFAULT FALSE
+  network_participant BOOLEAN
 );
 
 DROP TABLE IF EXISTS align.claims;
@@ -53,8 +51,7 @@ CREATE TABLE align.claims(
   disallowed_amount DECIMAL,
   awp DECIMAL,
   quantity DECIMAL,
-  day_supply INT,
-  processed BOOLEAN DEFAULT FALSE
+  day_supply INT
 );
 
 DROP TABLE IF EXISTS align.firstnames;
