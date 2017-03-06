@@ -17,9 +17,11 @@ This will create the align schema and tables needed to generate demo data.
 <b>Step 3</b>:
 
 Insert align care data into the following tables:
-align.members
-align.providers
-align.claims
+<ul>
+<li>align.members</li>
+<li>align.providers</li>
+<li>align.claims</li>
+</ul>
 
 The schema of these tables follows the original files that were provided to create demo_data.  They can be viewed in the “Install.sql” script reference in Step
 
