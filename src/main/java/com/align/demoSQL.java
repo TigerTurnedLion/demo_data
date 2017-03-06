@@ -121,6 +121,8 @@ public class demoSQL {
                     "lob " +
                 "FROM " +
                     "align.members " +
+                "WHERE " +
+                    "processed = false " +
                 "ORDER BY " +
                     "id;";
         return getRecords(query);
@@ -136,35 +138,39 @@ public class demoSQL {
                     "specialty_code," +
                     "network_participant " +
                 "FROM " +
-                    "align.providers;";
+                    "align.providers " +
+                "WHERE " +
+                    "processed = false;";
 
         return getRecords(query);
     }
     public ResultSet getClaims(){
         String query =
                 "SELECT " +
-                        "pharmacy_claim_nbr," +
-                        "id_number," +
-                        "ordering_physician_id," +
-                        "ordering_physician_dea," +
-                        "pharmacy_id," +
-                        "prescription_nbr," +
-                        "refill_code," +
-                        "ndc," +
-                        "date_paid," +
-                        "date_filled," +
-                        "brand_or_generic," +
-                        "amount_paid," +
-                        "ingredient_cost," +
-                        "dispensing_fee," +
-                        "copay_amt," +
-                        "deductible_amount," +
-                        "disallowed_amount," +
-                        "awp," +
-                        "quantity," +
-                        "day_supply " +
+                    "pharmacy_claim_nbr," +
+                    "id_number," +
+                    "ordering_physician_id," +
+                    "ordering_physician_dea," +
+                    "pharmacy_id," +
+                    "prescription_nbr," +
+                    "refill_code," +
+                    "ndc," +
+                    "date_paid," +
+                    "date_filled," +
+                    "brand_or_generic," +
+                    "amount_paid," +
+                    "ingredient_cost," +
+                    "dispensing_fee," +
+                    "copay_amt," +
+                    "deductible_amount," +
+                    "disallowed_amount," +
+                    "awp," +
+                    "quantity," +
+                    "day_supply " +
                 "FROM " +
-                    "align.claims;";
+                    "align.claims " +
+                "WHERE " +
+                    "processed = false;";
 
         return getRecords(query);
     }
