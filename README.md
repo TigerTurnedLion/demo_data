@@ -3,7 +3,7 @@
 On the Mac, you can use the Kitematic UI for this and click “Docker CLI”
 Or, you can launch it via the terminal.<p>
 
-Here is what my command looks like.  (You must adjust it to match your local system):<br>
+Here is what my terminal launch command looks like.  (You must adjust it to match your local system):<br>
 johnkelly$ bash -c "clear && DOCKER_HOST=tcp://192.168.99.100:2376 DOCKER_CERT_PATH=/Users/johnkelly/.docker/machine/machines/default DOCKER_TLS_VERIFY=1 /bin/bash”<p>
 
 <b>Download docker image from Docker Hub</b><p>
