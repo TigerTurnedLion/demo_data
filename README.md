@@ -1,21 +1,20 @@
 # Setup instructions for Aligncare Demo Data application
 <b>Connect to Docker CLI</b><p>
 On the Mac, you can use the Kitematic UI for this and click “Docker CLI”
-Or, you can launch it via the terminal.
+Or, you can launch it via the terminal.<p>
 
 Here is what my command looks like.  (You must adjust it to match your local system):<br>
-<font color="blue">johnkelly$ bash -c "clear && DOCKER_HOST=tcp://192.168.99.100:2376 DOCKER_CERT_PATH=/Users/johnkelly/.docker/machine/machines/default DOCKER_TLS_VERIFY=1 /bin/bash”
-</font>
+johnkelly$ bash -c "clear && DOCKER_HOST=tcp://192.168.99.100:2376 DOCKER_CERT_PATH=/Users/johnkelly/.docker/machine/machines/default DOCKER_TLS_VERIFY=1 /bin/bash”<p>
 
 <b>Download docker image from Docker Hub</b><p>
 You can download the docker image from the following location @ <a href="https://hub.docker.com/r/tigerturnedlion/aligncare-demo-data/">https://hub.docker.com/r/tigerturnedlion/aligncare-demo-data/</a>
 
 Here is the command to pull the image:<br>
-<font color="blue">docker pull tigerturnedlion/aligncare-demo-data</font>
+&#35; docker pull tigerturnedlion/aligncare-demo-data
 
 <b>Check image</b><p>
 Once downloaded, run the following command to ensure that the image is available:<br>
-docker images
+&#35; docker images
 
 You should see the following:<br>
 
@@ -25,7 +24,7 @@ You should see the following:<br>
 <br>
 <b>Launch container</b><p>
 Now, you can shell into the container via the following command:<br>
-docker run -it tigerturnedlion/aligncare-demo-data
+&#35; docker run -it tigerturnedlion/aligncare-demo-data
 
 <b>Set up mount of local drives - Windows vs Linux</b><p>
 In order to load data into postgres, the members, providers, claims files must be accessible via the containers file structure.  You can mount a local drive into the container for this purpose.  Here are the details for mounting a drive for Windows and/or Mac @ <a href="https://docs.docker.com/engine/tutorials/dockervolumes/#adding-a-data-volume">https://docs.docker.com/engine/tutorials/dockervolumes/#adding-a-data-volume</a>
@@ -37,7 +36,7 @@ Alternatively, you can download the files into the container using CURL -O flag 
 With a shell into the container loaded, you should connect to postgres via the postgres CLI.<p>
 
 To do this, run the following on the command line:<br>
-psql postgres root<p>
+&#35; psql postgres root<p>
 
 You should see the following:<br>
 psql (9.2.15)<br>
@@ -121,7 +120,7 @@ You can output the results using the COPY command again<p>
 Examples:<p>
 
 Launch the SQL prompt:<br>
-psql postgres root<p>
+&#35; psql postgres root<p>
 
 Then extract the data from the HASH tables<br>
 postgres=# COPY align.hash_members TO ‘/MOUNT_DRIVE/OUTPUT_MEMBER_FILE.csv' DELIMITER ',' CSV;<br>
