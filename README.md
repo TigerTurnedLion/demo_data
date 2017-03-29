@@ -64,6 +64,7 @@ You should see the following:<br>
 (8 rows)<p>
 
 <b>Truncate tables</b><p>
+Note: You can skip this section on the initial setup.
 
 Truncate the following 6 tables before each run:<p>
 
