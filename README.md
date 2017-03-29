@@ -63,8 +63,7 @@ You should see the following:<br>
 <br>
 (8 rows)<p>
 
-<b>Truncate tables</b><p>
-Note: You can skip this section on the initial setup.
+<b>Truncate tables</b> (Note: You can skip this section on the initial setup)<p>
 
 Truncate the following 6 tables before each run:<p>
 
