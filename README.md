@@ -18,9 +18,11 @@ Once downloaded, run the following command to ensure that the image is available
 docker images
 
 You should see the following:<br>
-REPOSITORY     							TAG                IMAGE ID              CREATED            SIZE<br>
-tigerturnedlion/aligncare-demo-data     latest              ff8a9bc2564e        ? days ago          1.29 GB<br>
 
+| REPOSITORY | TAG | IMAGE ID | CREATED | SIZE |
+| --- | --- | --- | --- | --- |
+| tigerturnedlion/aligncare-demo-data | latest | ff8a9bc2564e | ? days ago | 1.29 GB |
+<br>
 <b>Launch container</b><p>
 Now, you can shell into the container via the following command:<br>
 docker run -it tigerturnedlion/aligncare-demo-data
@@ -48,7 +50,7 @@ postgres=# \dt align.*<p>
 
 You should see the following:<br>
              List of relations<br>
-             
+
 | Schema | Name | Type | Owner |
 | --- | --- | --- | --- |
 | align | claims | table | postgres |
