@@ -21,56 +21,56 @@ REPOSITORY     							TAG                IMAGE ID              CREATED          
 tigerturnedlion/aligncare-demo-data     latest              ff8a9bc2564e        ? days ago          1.29 GB<br>
 
 <b>Launch container</b><p>
-Now, you can shell into the container via the following command:
+Now, you can shell into the container via the following command:<br>
 docker run -it tigerturnedlion/aligncare-demo-data
 
-Set up mount of local drives - Windows vs Linux
+<b>Set up mount of local drives - Windows vs Linux</b><p>
 In order to load data into postgres, the members, providers, claims files must be accessible via the containers file structure.  You can mount a local drive into the container for this purpose.  Here are the details for mounting a drive for Windows and/or Mac @ <a href="https://docs.docker.com/engine/tutorials/dockervolumes/#adding-a-data-volume">https://docs.docker.com/engine/tutorials/dockervolumes/#adding-a-data-volume</a>
 
 <b>Alternative CURL</b><p>
-Alternatively, you can download the files into the container using CURL -O flag command if they are hosted via ftp or http.
+Alternatively, you can download the files into the container using CURL -O flag command if they are hosted via ftp or http.<p>
 
 <b>Launch Postgres</b><p>
-With a shell into the container loaded, you should connect to postgres via the postgres CLI.
+With a shell into the container loaded, you should connect to postgres via the postgres CLI.<p>
 
-To do this, run the following on the command line:
-psql postgres root
+To do this, run the following on the command line:<br>
+psql postgres root<p>
 
-You should see the following:
-psql (9.2.15)
-Type "help" for help.
+You should see the following:<br>
+psql (9.2.15)<br>
+Type "help" for help.<p>
 
-postgres=#
+postgres=#<p>
 
-This is your sql prompt.  Check that the schema and tables are available:
-postgres=# \dt align.*
+This is your sql prompt.  Check that the schema and tables are available:<br>
+postgres=# \dt align.*<p>
 
-You should see the following:
-             List of relations
-Schema |      Name      | Type  |  Owner
---------+----------------+-------+----------
-align  | claims                 | table | postgres
-align  | firstnames           | table | postgres
-align  | hash_claims        | table | postgres
-align  | hash_members   | table | postgres
-align  | hash_providers   | table | postgres
-align  | lastnames           | table | postgres
-align  | members            | table | postgres
-align  | providers            | table | postgres
-(8 rows)
+You should see the following:<br>
+             List of relations<br>
+Schema |      Name      | Type  |  Owner<br>
+--------+----------------+-------+----------<br>
+align  | claims                 | table | postgres<br>
+align  | firstnames           | table | postgres<br>
+align  | hash_claims        | table | postgres<br>
+align  | hash_members   | table | postgres<br>
+align  | hash_providers   | table | postgres<br>
+align  | lastnames           | table | postgres<br>
+align  | members            | table | postgres<br>
+align  | providers            | table | postgres<br>
+(8 rows)<br>
 
 <b>Truncate tables</b><p>
 
-Truncate the following 6 tables before each run:
+Truncate the following 6 tables before each run:<p>
 
-postgres=# TRUNCATE align.claims;
-postgres=# TRUNCATE align.hash_claims;
-postgres=# TRUNCATE align.hash_members;
-postgres=# TRUNCATE align.hash_providers;
-postgres=# TRUNCATE align.members;
-postgres=# TRUNCATE align.providers;
+postgres=# TRUNCATE align.claims;<br>
+postgres=# TRUNCATE align.hash_claims;<br>
+postgres=# TRUNCATE align.hash_members;<br>
+postgres=# TRUNCATE align.hash_providers;<br>
+postgres=# TRUNCATE align.members;<br>
+postgres=# TRUNCATE align.providers;<p>
 
-DO NOT truncate the align.firstnames or align.lastnames tables.  If this happens, the image will need to be reloaded and setup again.
+DO NOT truncate the align.firstnames or align.lastnames tables.  If this happens, the image will need to be reloaded and setup again.<p>
 
 <b>Upload files</b><p>
 
