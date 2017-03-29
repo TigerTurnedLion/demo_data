@@ -97,10 +97,10 @@ Exit the SQL prompt via the following hot-key combination:<br>
 Control + D<p>
 
 Navigate to the JAR directory in the container @<br>
-## cd /demo_data/target<p>
+&#35; cd /demo_data/target<p>
 
 Now, run the Java app from the command line.<br>
-## java -jar demo-0.0.1-SNAPSHOT.jar<p>
+&#35; java -jar demo-0.0.1-SNAPSHOT.jar<p>
 
 You will see scrolling print-outs that indicate Spring Boot is running and align care data is processing.<p>
 
