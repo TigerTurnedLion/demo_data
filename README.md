@@ -48,17 +48,18 @@ postgres=# \dt align.*<p>
 
 You should see the following:<br>
              List of relations<br>
-Schema |      Name      | Type  |  Owner<br>
---------+----------------+-------+----------<br>
-align  | claims                 | table | postgres<br>
-align  | firstnames           | table | postgres<br>
-align  | hash_claims        | table | postgres<br>
-align  | hash_members   | table | postgres<br>
-align  | hash_providers   | table | postgres<br>
-align  | lastnames           | table | postgres<br>
-align  | members            | table | postgres<br>
-align  | providers            | table | postgres<br>
-(8 rows)<br>
+| Schema | Name | Type | Owner |
+| --- | --- | --- | --- |
+| align | claims | table | postgres |
+| align | firstnames | table | postgres |
+| align | hash_claims | table | postgres |
+| align | hash_members | table | postgres |
+| align | hash_providers | table | postgres |
+| align | lastnames | table | postgres |
+| align | members | table | postgres |
+| align | providers | table | postgres |
+<br>
+(8 rows)<p>
 
 <b>Truncate tables</b><p>
 
