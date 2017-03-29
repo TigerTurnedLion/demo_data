@@ -48,6 +48,7 @@ postgres=# \dt align.*<p>
 
 You should see the following:<br>
              List of relations<br>
+             
 | Schema | Name | Type | Owner |
 | --- | --- | --- | --- |
 | align | claims | table | postgres |
