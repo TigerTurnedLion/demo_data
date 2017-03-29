@@ -1,3 +1,4 @@
+#Setup instructions for Aligncare Demo Data application
 <b>Connect to Docker CLI</b><p>
 On the Mac, you can use the Kitematic UI for this and click “Docker CLI”
 Or, you can launch it via the terminal.
@@ -96,10 +97,10 @@ Exit the SQL prompt via the following hot-key combination:
 Control + D
 
 Navigate to the JAR directory in the container @
-# cd /demo_data/target
+/# cd /demo_data/target
 
 Now, run the Java app from the command line.
-# java -jar demo-0.0.1-SNAPSHOT.jar
+/# java -jar demo-0.0.1-SNAPSHOT.jar
 
 You will see scrolling print-outs that indicate Spring Boot is running and align care data is processing
 
