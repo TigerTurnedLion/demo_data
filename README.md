@@ -1,36 +1,133 @@
-# demo_data
-Program to generate demo data for align care.
+<b>Connect to Docker CLI</b>
+On the Mac, you can use the Kitematic UI for this and click “Docker CLI”
+Or, you can launch it via the terminal.
 
-<b>Step 1</b>:
+Here is what my command looks like.  (You must adjust it to match your local system):
+johnkelly$ bash -c "clear && DOCKER_HOST=tcp://192.168.99.100:2376 DOCKER_CERT_PATH=/Users/johnkelly/.docker/machine/machines/default DOCKER_TLS_VERIFY=1 /bin/bash”
 
-Download Java code from github @ https://github.com/TigerTurnedLion/demo_data
+<b>Download docker image from Docker Hub</b>
+You can download the docker image from the following location @ <a href="https://hub.docker.com/r/tigerturnedlion/aligncare-demo-data/">https://hub.docker.com/r/tigerturnedlion/aligncare-demo-data/</a>
 
-This repo contains a java program and SQL scripts needed to produce the demo data for align care.
+Here is the command to pull the image:
+docker pull tigerturnedlion/aligncare-demo-data
 
-<b>Step 2</b>:
+<b>Check image</b>
+Once downloaded, run the following command to ensure that the image is available:
+docker images
 
-Setup an instance of Postgres 9.5 or greater and run the SQL script located @
- “<APP_PATH>/demo_data/src/main/resources/seed_data/install.sql” in it.
+You should see the following:
+REPOSITORY                                        TAG                IMAGE ID              CREATED            SIZE
+tigerturnedlion/aligncare-demo-data     latest              ff8a9bc2564e        ? days ago          1.29 GB
 
-This will create the align schema and tables needed to generate demo data.
+<b>Launch container</b>
+Now, you can shell into the container via the following command:
+docker run -it tigerturnedlion/aligncare-demo-data
 
-<b>Step 3</b>:
+Set up mount of local drives - Windows vs Linux
+In order to load data into postgres, the members, providers, claims files must be accessible via the containers file structure.  You can mount a local drive into the container for this purpose.  Here are the details for mounting a drive for Windows and/or Mac @ <a href="https://docs.docker.com/engine/tutorials/dockervolumes/#adding-a-data-volume">https://docs.docker.com/engine/tutorials/dockervolumes/#adding-a-data-volume</a>
 
-Insert align care data into the following tables:
-<ul>
-<li>align.members</li>
-<li>align.providers</li>
-<li>align.claims</li>
-</ul>
+<b>Alternative CURL</b>
+Alternatively, you can download the files into the container using CURL -O flag command if they are hosted via ftp or http.
 
-The schema of these tables follows the original files that were provided to create demo_data.  They can be viewed in the “Install.sql” script reference in Step
+<b>Launch Postgres</b>
+With a shell into the container loaded, you should connect to postgres via the postgres CLI.
 
-<b>Step 4</b>:
+To do this, run the following on the command line:
+psql postgres root
 
-Change the Postgres connection string @ processControl.initConnection() method.
+You should see the following:
+psql (9.2.15)
+Type "help" for help.
 
-Note: The connection string within the code is to localhost with the postgres default port: 5432 with no user name or password.  If postgres is install on the same server as the running application, this connection string can be used as is.
+postgres=#
 
-<b>Step 5</b>:
+This is your sql prompt.  Check that the schema and tables are available:
+postgres=# \dt align.*
 
-Run the application by calling the main() method located in class: “DemoDataApplication"
+You should see the following:
+             List of relations
+Schema |      Name      | Type  |  Owner
+--------+----------------+-------+----------
+align  | claims                 | table | postgres
+align  | firstnames           | table | postgres
+align  | hash_claims        | table | postgres
+align  | hash_members   | table | postgres
+align  | hash_providers   | table | postgres
+align  | lastnames           | table | postgres
+align  | members            | table | postgres
+align  | providers            | table | postgres
+(8 rows)
+
+<b>Truncate tables</b>
+
+Truncate the following 6 tables before each run:
+
+postgres=# TRUNCATE align.claims;
+postgres=# TRUNCATE align.hash_claims;
+postgres=# TRUNCATE align.hash_members;
+postgres=# TRUNCATE align.hash_providers;
+postgres=# TRUNCATE align.members;
+postgres=# TRUNCATE align.providers;
+
+DO NOT truncate the align.firstnames or align.lastnames tables.  If this happens, the image will need to be reloaded and setup again.
+
+<b>Upload files</b>
+
+From your mounted drive, you can upload the members, providers, and claims files via the COPY command.
+Examples:
+
+postgres=# COPY align.members FROM '/path/to/csv/MEMBER_FILE' DELIMITER ',' CSV;
+postgres=# COPY align.providers FROM '/path/to/csv/PROVIDER_FILE' DELIMITER ',' CSV;
+postgres=# COPY align.claims FROM '/path/to/csv/CLAIM_FILE' DELIMITER ',' CSV;
+
+Note: “/path/to/csv/“ is the mounted drive.  And, MEMBER_FILE, PROVIDER_FILE, and CLAIM_FILE are replaced with the actual file names.
+
+Also, the fields in the file HEADER i.e. columns must match the fields of the corresponding table.  You can view each table's columns with the following commands:
+
+postgres=# \dS align.members;
+postgres=# \dS align.providers;
+postgres=# \dS align.claims;
+
+Note: you do not need to include the “id” columns in your upload csv files.  These columns are “SERIAL” which is equivalent to a SQL Server “IDENTITY” column and will be auto-populated for you; just ignore it.
+
+<b>Run Java program</b>
+
+Exit the SQL prompt via the following hot-key combination:
+Control + D
+
+Navigate to the JAR directory in the container @
+# cd /demo_data/target
+
+Now, run the Java app from the command line.
+# java -jar demo-0.0.1-SNAPSHOT.jar
+
+You will see scrolling print-outs that indicate Spring Boot is running and align care data is processing
+
+<b>Export data</b>
+Once complete, the Demo Data will be loaded into the following tables:
+
+- align.hash_members
+- align.hash_providers
+- align.hash_claims
+
+You can output the results using the COPY command again
+
+Examples:
+
+Launch the SQL prompt:
+psql postgres root
+
+Then extract the data from the HASH tables
+postgres=# COPY align.hash_members TO ‘/MOUNT_DRIVE/OUTPUT_MEMBER_FILE.csv' DELIMITER ',' CSV;
+postgres=# COPY align.hash_providers TO ‘/MOUNT_DRIVE/OUTPUT_PROVIDER_FILE.csv' DELIMITER ',' CSV;
+postgres=# COPY align.hash_claims TO ‘/MOUNT_DRIVE/OUTPUT_CLAIM_FILE.csv' DELIMITER ',' CSV;
+
+If you want the first row to contain column headers, include the HEADER switch e.g.
+postgres=# COPY align.hash_members TO ‘/MOUNT_DRIVE/OUTPUT_MEMBER_FILE.csv' DELIMITER ',’ CSV HEADER;
+
+See this Stackoverflow for details @ <a href="http://stackoverflow.com/questions/1120109/export-postgres-table-to-csv-file-with-headings">http://stackoverflow.com/questions/1120109/export-postgres-table-to-csv-file-with-headings</a>
+
+<b>Postscript on Postgres</b>
+All the SQL prompt and Java commands can be combined into script for automation.  The details will be specific to your environment.
+
+Please let me know if you have any questions or run into issues, I am available to to work through it.
