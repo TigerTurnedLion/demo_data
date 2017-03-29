@@ -4,13 +4,14 @@ On the Mac, you can use the Kitematic UI for this and click “Docker CLI”
 Or, you can launch it via the terminal.
 
 Here is what my command looks like.  (You must adjust it to match your local system):<br>
-<font color="blue">johnkelly$ bash -c "clear && DOCKER_HOST=tcp://192.168.99.100:2376 DOCKER_CERT_PATH=/Users/johnkelly/.docker/machine/machines/default DOCKER_TLS_VERIFY=1 /bin/bash”</font>
+<font color="blue">johnkelly$ bash -c "clear && DOCKER_HOST=tcp://192.168.99.100:2376 DOCKER_CERT_PATH=/Users/johnkelly/.docker/machine/machines/default DOCKER_TLS_VERIFY=1 /bin/bash”
+</font>
 
 <b>Download docker image from Docker Hub</b><p>
 You can download the docker image from the following location @ <a href="https://hub.docker.com/r/tigerturnedlion/aligncare-demo-data/">https://hub.docker.com/r/tigerturnedlion/aligncare-demo-data/</a>
 
 Here is the command to pull the image:<br>
-docker pull tigerturnedlion/aligncare-demo-data
+<font color="blue">docker pull tigerturnedlion/aligncare-demo-data</font>
 
 <b>Check image</b><p>
 Once downloaded, run the following command to ensure that the image is available:<br>
