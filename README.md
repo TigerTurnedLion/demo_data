@@ -74,61 +74,61 @@ DO NOT truncate the align.firstnames or align.lastnames tables.  If this happens
 
 <b>Upload files</b><p>
 
-From your mounted drive, you can upload the members, providers, and claims files via the COPY command.
-Examples:
+From your mounted drive, you can upload the members, providers, and claims files via the COPY command.<br>
+Examples:<p>
 
-postgres=# COPY align.members FROM '/path/to/csv/MEMBER_FILE' DELIMITER ',' CSV;
-postgres=# COPY align.providers FROM '/path/to/csv/PROVIDER_FILE' DELIMITER ',' CSV;
-postgres=# COPY align.claims FROM '/path/to/csv/CLAIM_FILE' DELIMITER ',' CSV;
+postgres=# COPY align.members FROM '/path/to/csv/MEMBER_FILE' DELIMITER ',' CSV;<br>
+postgres=# COPY align.providers FROM '/path/to/csv/PROVIDER_FILE' DELIMITER ',' CSV;<br>
+postgres=# COPY align.claims FROM '/path/to/csv/CLAIM_FILE' DELIMITER ',' CSV;<p>
 
-Note: “/path/to/csv/“ is the mounted drive.  And, MEMBER_FILE, PROVIDER_FILE, and CLAIM_FILE are replaced with the actual file names.
+Note: “/path/to/csv/“ is the mounted drive.  And, MEMBER_FILE, PROVIDER_FILE, and CLAIM_FILE are replaced with the actual file names.<p>
 
-Also, the fields in the file HEADER i.e. columns must match the fields of the corresponding table.  You can view each table's columns with the following commands:
+Also, the fields in the file HEADER i.e. columns must match the fields of the corresponding table.  You can view each table's columns with the following commands:<p>
 
-postgres=# \dS align.members;
-postgres=# \dS align.providers;
-postgres=# \dS align.claims;
+postgres=# \dS align.members;<br>
+postgres=# \dS align.providers;<br>
+postgres=# \dS align.claims;<p>
 
-Note: you do not need to include the “id” columns in your upload csv files.  These columns are “SERIAL” which is equivalent to a SQL Server “IDENTITY” column and will be auto-populated for you; just ignore it.
+Note: you do not need to include the “id” columns in your upload csv files.  These columns are “SERIAL” which is equivalent to a SQL Server “IDENTITY” column and will be auto-populated for you; just ignore it.<p>
 
 <b>Run Java program</b><p>
 
-Exit the SQL prompt via the following hot-key combination:
-Control + D
+Exit the SQL prompt via the following hot-key combination:<br>
+Control + D<p>
 
 Navigate to the JAR directory in the container @<br>
-/# cd /demo_data/target
+/# cd /demo_data/target<p>
 
 Now, run the Java app from the command line.<br>
-/# java -jar demo-0.0.1-SNAPSHOT.jar
+/# java -jar demo-0.0.1-SNAPSHOT.jar<p>
 
-You will see scrolling print-outs that indicate Spring Boot is running and align care data is processing
+You will see scrolling print-outs that indicate Spring Boot is running and align care data is processing.<p>
 
 <b>Export data</b><p>
-Once complete, the Demo Data will be loaded into the following tables:
+Once complete, the Demo Data will be loaded into the following tables:<p>
 
 - align.hash_members
 - align.hash_providers
 - align.hash_claims
 
-You can output the results using the COPY command again
+You can output the results using the COPY command again<p>
 
-Examples:
+Examples:<p>
 
-Launch the SQL prompt:
-psql postgres root
+Launch the SQL prompt:<br>
+psql postgres root<p>
 
-Then extract the data from the HASH tables
-postgres=# COPY align.hash_members TO ‘/MOUNT_DRIVE/OUTPUT_MEMBER_FILE.csv' DELIMITER ',' CSV;
-postgres=# COPY align.hash_providers TO ‘/MOUNT_DRIVE/OUTPUT_PROVIDER_FILE.csv' DELIMITER ',' CSV;
-postgres=# COPY align.hash_claims TO ‘/MOUNT_DRIVE/OUTPUT_CLAIM_FILE.csv' DELIMITER ',' CSV;
+Then extract the data from the HASH tables<br>
+postgres=# COPY align.hash_members TO ‘/MOUNT_DRIVE/OUTPUT_MEMBER_FILE.csv' DELIMITER ',' CSV;<br>
+postgres=# COPY align.hash_providers TO ‘/MOUNT_DRIVE/OUTPUT_PROVIDER_FILE.csv' DELIMITER ',' CSV;<br>
+postgres=# COPY align.hash_claims TO ‘/MOUNT_DRIVE/OUTPUT_CLAIM_FILE.csv' DELIMITER ',' CSV;<p>
 
-If you want the first row to contain column headers, include the HEADER switch e.g.
-postgres=# COPY align.hash_members TO ‘/MOUNT_DRIVE/OUTPUT_MEMBER_FILE.csv' DELIMITER ',’ CSV HEADER;
+If you want the first row to contain column headers, include the HEADER switch e.g.<br>
+postgres=# COPY align.hash_members TO ‘/MOUNT_DRIVE/OUTPUT_MEMBER_FILE.csv' DELIMITER ',’ CSV HEADER;<p>
 
-See this Stackoverflow for details @ <a href="http://stackoverflow.com/questions/1120109/export-postgres-table-to-csv-file-with-headings">http://stackoverflow.com/questions/1120109/export-postgres-table-to-csv-file-with-headings</a>
+See this Stackoverflow for details @ <a href="http://stackoverflow.com/questions/1120109/export-postgres-table-to-csv-file-with-headings">http://stackoverflow.com/questions/1120109/export-postgres-table-to-csv-file-with-headings</a><p>
 
 <b>Postscript on Postgres</b><p>
-All the SQL prompt and Java commands can be combined into script for automation.  The details will be specific to your environment.
+All the SQL prompt and Java commands can be combined into script for automation.  The details will be specific to your environment.<p>
 
 Please let me know if you have any questions or run into issues, I am available to to work through it.
