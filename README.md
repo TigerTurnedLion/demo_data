@@ -4,7 +4,7 @@ On the Mac, you can use the Kitematic UI for this and click “Docker CLI”
 Or, you can launch it via the terminal.
 
 Here is what my command looks like.  (You must adjust it to match your local system):<br>
-johnkelly$ bash -c "clear && DOCKER_HOST=tcp://192.168.99.100:2376 DOCKER_CERT_PATH=/Users/johnkelly/.docker/machine/machines/default DOCKER_TLS_VERIFY=1 /bin/bash”
+<font color="blue">johnkelly$ bash -c "clear && DOCKER_HOST=tcp://192.168.99.100:2376 DOCKER_CERT_PATH=/Users/johnkelly/.docker/machine/machines/default DOCKER_TLS_VERIFY=1 /bin/bash”</font>
 
 <b>Download docker image from Docker Hub</b><p>
 You can download the docker image from the following location @ <a href="https://hub.docker.com/r/tigerturnedlion/aligncare-demo-data/">https://hub.docker.com/r/tigerturnedlion/aligncare-demo-data/</a>
@@ -97,10 +97,10 @@ Exit the SQL prompt via the following hot-key combination:<br>
 Control + D<p>
 
 Navigate to the JAR directory in the container @<br>
-/# cd /demo_data/target<p>
+## cd /demo_data/target<p>
 
 Now, run the Java app from the command line.<br>
-/# java -jar demo-0.0.1-SNAPSHOT.jar<p>
+## java -jar demo-0.0.1-SNAPSHOT.jar<p>
 
 You will see scrolling print-outs that indicate Spring Boot is running and align care data is processing.<p>
 
